@@ -1,8 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Wander.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\NN.cs">
     <Files>
-      <File FileName="Assets\Wander.cs" Line="6" Column="15" />
+      <File FileName="Assets\Raycasting.cs" Line="25" Column="44" />
+      <File FileName="Assets\Wander.cs" Line="1" Column="1" />
+      <File FileName="Assets\NN.cs" Line="19" Column="102" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
