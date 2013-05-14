@@ -47,6 +47,14 @@
      <Compile Include="Assets\NN.cs" />
      <Compile Include="Assets\Raycasting.cs" />
      <Compile Include="Assets\Wander.cs" />
+     <Compile Include="Assets\WebClient\ClientObject.cs" />
+     <Compile Include="Assets\WebClient\MyService.cs" />
+ <Reference Include="System.Web">
+ <HintPath>Assets\Plugins\System.Web.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Web.Services">
+ <HintPath>Assets\Plugins\System.Web.Services.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
