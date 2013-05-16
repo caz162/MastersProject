@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{257618A8-4D93-8B99-F22F-E5304D2BF200}</ProjectGuid>
+	<ProjectGuid>{54300FFE-8AE4-2201-6F84-108118945A59}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -44,9 +44,9 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\NN.cs" />
-     <Compile Include="Assets\Raycasting.cs" />
-     <Compile Include="Assets\Wander.cs" />
+     <Compile Include="Assets\Neural Network\NN.cs" />
+     <Compile Include="Assets\Prefabs\Raycasting.cs" />
+     <Compile Include="Assets\Prefabs\Wander.cs" />
      <Compile Include="Assets\WebClient\ClientObject.cs" />
      <Compile Include="Assets\WebClient\MyService.cs" />
  <Reference Include="System.Web">

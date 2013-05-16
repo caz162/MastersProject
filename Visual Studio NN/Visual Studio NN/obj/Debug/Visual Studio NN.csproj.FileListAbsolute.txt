@@ -1,0 +1,8 @@
+C:\Users\Caz\Desktop\MastersProject\Visual Studio NN\Visual Studio NN\obj\Debug\Visual Studio NN.csprojResolveAssemblyReference.cache
+C:\Users\Caz\Desktop\MastersProject\Visual Studio NN\Visual Studio NN\obj\Debug\Visual_Studio_NN.Form1.resources
+C:\Users\Caz\Desktop\MastersProject\Visual Studio NN\Visual Studio NN\obj\Debug\Visual_Studio_NN.Properties.Resources.resources
+C:\Users\Caz\Desktop\MastersProject\Visual Studio NN\Visual Studio NN\obj\Debug\Visual Studio NN.csproj.GenerateResource.Cache
+C:\Users\Caz\Desktop\MastersProject\Visual Studio NN\Visual Studio NN\bin\Debug\Visual Studio NN.exe
+C:\Users\Caz\Desktop\MastersProject\Visual Studio NN\Visual Studio NN\bin\Debug\Visual Studio NN.pdb
+C:\Users\Caz\Desktop\MastersProject\Visual Studio NN\Visual Studio NN\obj\Debug\Visual Studio NN.exe
+C:\Users\Caz\Desktop\MastersProject\Visual Studio NN\Visual Studio NN\obj\Debug\Visual Studio NN.pdb
