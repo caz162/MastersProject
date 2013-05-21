@@ -123,13 +123,15 @@ namespace Visual_Studio_NN
                 i++;
             }
         }
-        public void Run()
+        public float Run()
         {
             Setup();
             DefaultWeights();
             SetWeights();
             neurons.ElementAt(0).RecieveData(1);
             neurons.ElementAt(1).RecieveData(1);
+            Console.WriteLine("Finished is " + neurons.ElementAt(neurons.Count-1).GetOutput());
+			return neurons.ElementAt(neurons.Count-1).GetOutput();
         }
 
         void DefaultWeights()

@@ -52,6 +52,7 @@
      <Compile Include="Assets\Prefabs\Wander.cs" />
      <Compile Include="Assets\WebClient\ClientObject.cs" />
      <Compile Include="Assets\WebClient\MyService.cs" />
+     <Compile Include="Assets\WebClient\MyService2.cs" />
  <Reference Include="System.Web">
  <HintPath>Assets\Plugins\System.Web.dll</HintPath>
  </Reference>

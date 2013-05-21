@@ -1,0 +1,13 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="App_Code\MyService.asmx.cs">
+    <Files>
+      <File FileName="App_Code\MyService.asmx.cs" Line="24" Column="30" />
+      <File FileName="..\..\..\Visual Studio NN\Visual Studio NN\MainTest.cs" Line="140" Column="14" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
