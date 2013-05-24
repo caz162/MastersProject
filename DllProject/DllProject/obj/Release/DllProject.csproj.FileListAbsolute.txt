@@ -1,1 +1,5 @@
 C:\Users\Caz\Desktop\MastersProject\DllProject\DllProject\obj\Release\DllProject.csprojResolveAssemblyReference.cache
+C:\Users\Caz\Desktop\MastersProject\DllProject\DllProject\bin\Release\DllProject.dll
+C:\Users\Caz\Desktop\MastersProject\DllProject\DllProject\bin\Release\DllProject.pdb
+C:\Users\Caz\Desktop\MastersProject\DllProject\DllProject\obj\Release\DllProject.dll
+C:\Users\Caz\Desktop\MastersProject\DllProject\DllProject\obj\Release\DllProject.pdb

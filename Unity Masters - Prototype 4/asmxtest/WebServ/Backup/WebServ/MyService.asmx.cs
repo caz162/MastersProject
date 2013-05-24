@@ -2,7 +2,9 @@ using System;
 using System.Web.Services;
 using Visual_Studio_NN;
 
+
 [WebService (Namespace = "http://tempuri.org/MyService")]
+
 public class MyService
 {
 
@@ -25,7 +27,7 @@ public class MyService
 	}
 
     [WebMethod]
-    public int Random(Random r, int max, int min)
+    public int Rand(Random r, int max, int min)
     {
          return r.Next(min, max);
         

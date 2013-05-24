@@ -24,7 +24,9 @@ public partial class MyService : System.Web.Services.Protocols.SoapHttpClientPro
     
     private System.Threading.SendOrPostCallback PrintOperationCompleted;
     
-    private System.Threading.SendOrPostCallback RandomOperationCompleted;
+    private System.Threading.SendOrPostCallback RunNNOperationCompleted;
+    
+    private System.Threading.SendOrPostCallback RandOperationCompleted;
     
     public MyService() {
         this.Url = "http://localhost:8080/MyService.asmx";
@@ -34,7 +36,9 @@ public partial class MyService : System.Web.Services.Protocols.SoapHttpClientPro
     
     public event PrintCompletedEventHandler PrintCompleted;
     
-    public event RandomCompletedEventHandler RandomCompleted;
+    public event RunNNCompletedEventHandler RunNNCompleted;
+    
+    public event RandCompletedEventHandler RandCompleted;
     
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/MyService/Add", RequestNamespace="http://tempuri.org/MyService", ResponseNamespace="http://tempuri.org/MyService", ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped, Use=System.Web.Services.Description.SoapBindingUse.Literal)]
     public int Add(int a, int b) {
@@ -106,45 +110,78 @@ public partial class MyService : System.Web.Services.Protocols.SoapHttpClientPro
         }
     }
     
-    [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/MyService/Random", RequestNamespace="http://tempuri.org/MyService", ResponseNamespace="http://tempuri.org/MyService", ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped, Use=System.Web.Services.Description.SoapBindingUse.Literal)]
-    public int Random(Random r, int max, int min) {
-        object[] results = this.Invoke("Random", new object[] {
+    [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/MyService/RunNN", RequestNamespace="http://tempuri.org/MyService", ResponseNamespace="http://tempuri.org/MyService", ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped, Use=System.Web.Services.Description.SoapBindingUse.Literal)]
+    public float RunNN() {
+        object[] results = this.Invoke("RunNN", new object[0]);
+        return ((float)(results[0]));
+    }
+    
+    public System.IAsyncResult BeginRunNN(System.AsyncCallback callback, object asyncState) {
+        return this.BeginInvoke("RunNN", new object[0], callback, asyncState);
+    }
+    
+    public float EndRunNN(System.IAsyncResult asyncResult) {
+        object[] results = this.EndInvoke(asyncResult);
+        return ((float)(results[0]));
+    }
+    
+    public void RunNNAsync() {
+        this.RunNNAsync(null);
+    }
+    
+    public void RunNNAsync(object userState) {
+        if ((this.RunNNOperationCompleted == null)) {
+            this.RunNNOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRunNNCompleted);
+        }
+        this.InvokeAsync("RunNN", new object[0], this.RunNNOperationCompleted, userState);
+    }
+    
+    private void OnRunNNCompleted(object arg) {
+        if ((this.RunNNCompleted != null)) {
+            System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+            this.RunNNCompleted(this, new RunNNCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+        }
+    }
+    
+    [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/MyService/Rand", RequestNamespace="http://tempuri.org/MyService", ResponseNamespace="http://tempuri.org/MyService", ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped, Use=System.Web.Services.Description.SoapBindingUse.Literal)]
+    public int Rand(Random r, int max, int min) {
+        object[] results = this.Invoke("Rand", new object[] {
                     r,
                     max,
                     min});
         return ((int)(results[0]));
     }
     
-    public System.IAsyncResult BeginRandom(Random r, int max, int min, System.AsyncCallback callback, object asyncState) {
-        return this.BeginInvoke("Random", new object[] {
+    public System.IAsyncResult BeginRand(Random r, int max, int min, System.AsyncCallback callback, object asyncState) {
+        return this.BeginInvoke("Rand", new object[] {
                     r,
                     max,
                     min}, callback, asyncState);
     }
     
-    public int EndRandom(System.IAsyncResult asyncResult) {
+    public int EndRand(System.IAsyncResult asyncResult) {
         object[] results = this.EndInvoke(asyncResult);
         return ((int)(results[0]));
     }
     
-    public void RandomAsync(Random r, int max, int min) {
-        this.RandomAsync(r, max, min, null);
+    public void RandAsync(Random r, int max, int min) {
+        this.RandAsync(r, max, min, null);
     }
     
-    public void RandomAsync(Random r, int max, int min, object userState) {
-        if ((this.RandomOperationCompleted == null)) {
-            this.RandomOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRandomCompleted);
+    public void RandAsync(Random r, int max, int min, object userState) {
+        if ((this.RandOperationCompleted == null)) {
+            this.RandOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRandCompleted);
         }
-        this.InvokeAsync("Random", new object[] {
+        this.InvokeAsync("Rand", new object[] {
                     r,
                     max,
-                    min}, this.RandomOperationCompleted, userState);
+                    min}, this.RandOperationCompleted, userState);
     }
     
-    private void OnRandomCompleted(object arg) {
-        if ((this.RandomCompleted != null)) {
+    private void OnRandCompleted(object arg) {
+        if ((this.RandCompleted != null)) {
             System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-            this.RandomCompleted(this, new RandomCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            this.RandCompleted(this, new RandCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
         }
     }
 }
@@ -179,11 +216,30 @@ public delegate void AddCompletedEventHandler(object sender, AddCompletedEventAr
 
 public delegate void PrintCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs args);
 
-public partial class RandomCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+public partial class RunNNCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
     
     private object[] results;
     
-    internal RandomCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+    internal RunNNCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+            base(exception, cancelled, userState) {
+        this.results = results;
+    }
+    
+    public float Result {
+        get {
+            this.RaiseExceptionIfNecessary();
+            return ((float)(this.results[0]));
+        }
+    }
+}
+
+public delegate void RunNNCompletedEventHandler(object sender, RunNNCompletedEventArgs args);
+
+public partial class RandCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    
+    private object[] results;
+    
+    internal RandCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
             base(exception, cancelled, userState) {
         this.results = results;
     }
@@ -196,4 +252,4 @@ public partial class RandomCompletedEventArgs : System.ComponentModel.AsyncCompl
     }
 }
 
-public delegate void RandomCompletedEventHandler(object sender, RandomCompletedEventArgs args);
+public delegate void RandCompletedEventHandler(object sender, RandCompletedEventArgs args);

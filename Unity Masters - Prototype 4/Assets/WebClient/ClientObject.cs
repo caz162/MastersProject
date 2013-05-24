@@ -18,7 +18,8 @@ public class ClientObject : MonoBehaviour {
 	void Update () {
 		int n = service.Add(i,i);
 		i++;
+		
 		//Debug.Log(n);
-		Debug.Log(service.Random(r,100,10));
+		Debug.Log(service.RunNN());
 	}
 }

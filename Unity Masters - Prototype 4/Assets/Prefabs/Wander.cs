@@ -7,7 +7,7 @@ public class Wander : MonoBehaviour {
 	int speed =10;
 	Vector3 direction;
 	Random rand = new Random();
-	int randomDirection;
+	float randomDirection;
 	MyService service;
 	
 	// Use this for initialization
@@ -17,7 +17,7 @@ public class Wander : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		randomDirection = service.Random(rand,10,-10);
+		randomDirection = service.RunNN();
 		//randomDirection = Random.Range(-10,10);	
 		
 		//direction.x = direction.x + randomDirection;
