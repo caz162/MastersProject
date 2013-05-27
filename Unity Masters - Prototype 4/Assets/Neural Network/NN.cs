@@ -7,7 +7,7 @@ public class NN : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		area = GameObject.FindGameObjectWithTag("End");
+		area = GameObject.FindGameObjectWithTag("2");
 	}
 	
 	// Update is called once per frame

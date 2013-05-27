@@ -21,10 +21,10 @@ public class MyService
     }
 	
 	[WebMethod]
-	public float RunNN(){
+	public float RunNN(int num){
 		MainTest t = new MainTest();
 		//Console.WriteLine(t.Run());
-		return t.Run();
+		return t.Run(num);
 	}
 
     [WebMethod]
@@ -98,7 +98,7 @@ class Connection
         {
             if (place == NeuronPlace.output)
             {
-                Console.WriteLine("Finished with -" + num);
+              //  Console.WriteLine("Finished with -" + num);
                 outputNum = num;
             }
             else
@@ -268,15 +268,15 @@ class Connection
                 i++;
             }
         }
-        public float Run()
+        public float Run(int num)
         {
             Setup();
             DefaultWeights();
             SetWeights();
-            neurons[0].RecieveData(1);
-            neurons[1].RecieveData(1);
-            Console.WriteLine("Finished is " + neurons[neurons.Count-1].GetOutput());
-    		return  6;   
+            neurons[0].RecieveData(num);
+            neurons[1].RecieveData(num);
+          //  Console.WriteLine("Finished is " + neurons[neurons.Count-1].GetOutput());
+    		return neurons[neurons.Count-1].GetOutput() ;   
 	}
 
         void DefaultWeights()

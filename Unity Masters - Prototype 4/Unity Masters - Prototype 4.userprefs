@@ -2,10 +2,12 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="asmxtest\FullServer\App_Code\MyService.asmx.cs">
     <Files>
-      <File FileName="asmxtest\FullServer\App_Code\MyService.asmx.cs" Line="119" Column="25" />
-      <File FileName="Assets\Neural Network\NN.cs" Line="20" Column="3" />
-      <File FileName="Assets\WebClient\ClientObject.cs" Line="22" Column="18" />
-      <File FileName="Assets\Prefabs\Wander.cs" Line="10" Column="7" />
+      <File FileName="asmxtest\FullServer\App_Code\MyService.asmx.cs" Line="1" Column="1" />
+      <File FileName="Assets\Prefabs\Raycasting.cs" Line="1" Column="1" />
+      <File FileName="Assets\Neural Network\NN.cs" Line="1" Column="1" />
+      <File FileName="Assets\WebClient\ClientObject.cs" Line="1" Column="1" />
+      <File FileName="Assets\Prefabs\Wander.cs" Line="1" Column="1" />
+      <File FileName="Assets\Prefabs\PlayerScript.cs" Line="22" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

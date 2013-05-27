@@ -111,13 +111,15 @@ public partial class MyService : System.Web.Services.Protocols.SoapHttpClientPro
     }
     
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/MyService/RunNN", RequestNamespace="http://tempuri.org/MyService", ResponseNamespace="http://tempuri.org/MyService", ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped, Use=System.Web.Services.Description.SoapBindingUse.Literal)]
-    public float RunNN() {
-        object[] results = this.Invoke("RunNN", new object[0]);
+    public float RunNN(int num) {
+        object[] results = this.Invoke("RunNN", new object[] {
+                    num});
         return ((float)(results[0]));
     }
     
-    public System.IAsyncResult BeginRunNN(System.AsyncCallback callback, object asyncState) {
-        return this.BeginInvoke("RunNN", new object[0], callback, asyncState);
+    public System.IAsyncResult BeginRunNN(int num, System.AsyncCallback callback, object asyncState) {
+        return this.BeginInvoke("RunNN", new object[] {
+                    num}, callback, asyncState);
     }
     
     public float EndRunNN(System.IAsyncResult asyncResult) {
@@ -125,15 +127,16 @@ public partial class MyService : System.Web.Services.Protocols.SoapHttpClientPro
         return ((float)(results[0]));
     }
     
-    public void RunNNAsync() {
-        this.RunNNAsync(null);
+    public void RunNNAsync(int num) {
+        this.RunNNAsync(num, null);
     }
     
-    public void RunNNAsync(object userState) {
+    public void RunNNAsync(int num, object userState) {
         if ((this.RunNNOperationCompleted == null)) {
             this.RunNNOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRunNNCompleted);
         }
-        this.InvokeAsync("RunNN", new object[0], this.RunNNOperationCompleted, userState);
+        this.InvokeAsync("RunNN", new object[] {
+                    num}, this.RunNNOperationCompleted, userState);
     }
     
     private void OnRunNNCompleted(object arg) {

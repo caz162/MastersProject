@@ -14,7 +14,7 @@ public class Raycasting : MonoBehaviour {
 	void Update () {
 	RaycastHit hit;
 		if(Physics.Raycast(transform.position,transform.TransformDirection( Vector3.forward), out hit,1000.0f)){
-			objectAimed = hit.collider.name;
+			objectAimed = hit.collider.tag;
 			distance = hit.distance;
 			Debug.DrawRay(transform.position, transform.TransformDirection( Vector3.forward) * hit.distance,Color.red);
 		}
