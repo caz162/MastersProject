@@ -1,0 +1,14 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="ServerSolution\MainTest.cs">
+    <Files>
+      <File FileName="ServerSolution\Chromosome.cs" Line="17" Column="26" />
+      <File FileName="ServerSolution\MainTest.cs" Line="86" Column="19" />
+      <File FileName="ServerSolution\MyService.asmx.cs" Line="35" Column="34" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
