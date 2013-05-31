@@ -7,7 +7,12 @@ using System.Collections.Generic;
     {
         List<Connection> connections = new List<Connection>();
         List<Neuron> neurons = new List<Neuron>();
+		List<Chromosome> population = new List<Chromosome>();
         List<float> weights = new List<float>();
+		Random r = new Random();
+		int id = 0;
+		int current =0;
+		
 
         void Setup()
         {
@@ -118,7 +123,7 @@ using System.Collections.Generic;
             int i = 0;
             foreach (Connection c in connections)
             {
-                c.SetWeight(weights[i]);
+                c.SetWeight(population[current].genes[i]);
                 i++;
             }
         }
@@ -130,14 +135,34 @@ using System.Collections.Generic;
             neurons[0].RecieveData(num);
             neurons[1].RecieveData(num);
           //  Console.WriteLine("Finished is " + neurons[neurons.Count-1].GetOutput());
+		
+		
     		return neurons[neurons.Count-1].GetOutput() ;   
 	}
-
-        void DefaultWeights()
+	
+	public void GeneratePopulation(int size){
+		for(int i = 0;i<size;i++){
+			Chromosome c = new Chromosome(id);
+			for(int j=0;j<connections.Count;j++){
+				c.AddGene(r.NextDouble());
+				
+			}
+			population.Add(c);
+			id++;
+		}
+	}
+	
+	public void RecieveFitness(int fit){
+		population[current].IncreaseFitness(fit);
+		Console.WriteLine(population[current].fitness);
+	}
+	
+	void DefaultWeights()
         {
             foreach (Connection c in connections)
             {
                 weights.Add(1);
             }
         }
-    }
+	
+}

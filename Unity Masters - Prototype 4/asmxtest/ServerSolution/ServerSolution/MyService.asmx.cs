@@ -23,9 +23,12 @@ public class MyService
 	[WebMethod]
 	public float RunNN(int num){
 		MainTest t = new MainTest();
-		
+		float value1 = t.Run(num);
+		if(num = 3){
+			t.RecieveFitness(1);
+		}
 		//Console.WriteLine(t.Run());
-		return t.Run(num);
+		return value1;
 	}
 
     [WebMethod]
