@@ -12,8 +12,10 @@ using System.Collections.Generic;
 		Random r = new Random();
 		int id = 0;
 		int current =0;
-		
-
+		bool newPop = false;
+		float crossoverRate = 0.25;
+	
+	
         void Setup()
         {
 
@@ -133,7 +135,7 @@ using System.Collections.Generic;
             DefaultWeights();
             SetWeights();
             neurons[0].RecieveData(num);
-            neurons[1].RecieveData(num);
+            neurons[1].RecieveData(1);
           //  Console.WriteLine("Finished is " + neurons[neurons.Count-1].GetOutput());
 		
 		
@@ -151,6 +153,39 @@ using System.Collections.Generic;
 			id++;
 		}
 	}
+	
+	public void ChangeChromosome(){
+			current++;
+			DefaultWeights();
+		
+		if(current => connections.Count){
+			population.Sort();
+			int removeAmount = connections.Count * crossoverRate;
+			for (int i = 0; i < connections.Count; i++)
+                {
+                    if (i >= removeAmount)
+                        population.RemoveAt(i);
+                }
+			for(int i =0;i<current - (current*crossoverRate);i++){
+				TSelection();
+				Crossover();
+			}
+			
+			current *= crossoverRate;
+			
+		}
+			SetWeights();
+	}
+	
+	public void TSelection(){
+		
+	}
+	
+	public void Crossover(){
+		
+	}
+	
+
 	
 	public void RecieveFitness(int fit){
 		population[current].IncreaseFitness(fit);
