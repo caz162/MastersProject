@@ -14,8 +14,8 @@ using System.Collections.Generic;
 		int current =0;
 		bool newPop = false;
 		float crossoverRate = 0.25;
-	
-	
+		float mutationRate = 0.08;
+		
         void Setup()
         {
 
@@ -159,6 +159,7 @@ using System.Collections.Generic;
 			DefaultWeights();
 		
 		if(current => connections.Count){
+			List<Chromosome> newPop = List<Chromosome>();
 			population.Sort();
 			int removeAmount = connections.Count * crossoverRate;
 			for (int i = 0; i < connections.Count; i++)
@@ -167,24 +168,76 @@ using System.Collections.Generic;
                         population.RemoveAt(i);
                 }
 			for(int i =0;i<current - (current*crossoverRate);i++){
-				TSelection();
-				Crossover();
+				Chromosome p1 = TSelection();
+				Chromosome p2 = TSelection();
+				while(p1.id == p2.id){
+					 p2 = TSelection();
+				}
+				Chromosome child =  Crossover(p1,p2);
+				Chromosome mChild = Mutation(child);
+				newPop.Add(mChild);
 			}
-			
+			for(int i=0;i< newPop.Count;i++){
+				population[removeAmount + i] = newPop[i];	
+			}
 			current *= crossoverRate;
 			
 		}
 			SetWeights();
 	}
 	
-	public void TSelection(){
+	public Chromosome TSelection(){
+		Chromosome parent1;
+		Chromosome parent2;
 		
+		parent1 = population[r.Next(0,population.Count)];
+		parent2 = population[r.Next(0,population.Count)];
+			
+		while(parent2.id == parent1.id){
+			parent2 = population[r.Next(0,population.Count)];
+			
+		}
+			if(parent1.fitness > parent2.fitness){
+			return parent1;
+			
+			
+		}
+		else{
+			return parent2;	
+			
+		}
 	}
 	
-	public void Crossover(){
+	public Chromosome Crossover(Chromosome parent1, Chromosome parent2){
+		int random = r.Next(parent1.genes.Count);
+		Chromosome child = new Chromosome(id);
+		id++;
 		
+		for(int i =0; i< random;i++){
+			child.AddGene(parent1.genes[i]);	
+		}
+		for (int i = random; i<parent1.genes.Count;i++){
+			child.AddGene(parent2.genes[i]);	
+		}
+		
+		return child;
 	}
 	
+	public Chromosome Mutation(Chromosome original){
+		Chromosome mChild = new Chromosome(original.id);
+		for(int i =0;i<original.genes.Count;i++){
+			if(r.NextDouble()< mutationRate){
+				mChild.AddGene(r.NextDouble());	
+			}
+			else{
+				mChild.AddGene(original.genes[i]);	
+			}
+				
+		}
+			return mChild;
+			
+		
+	}
 
 	
 	public void RecieveFitness(int fit){
