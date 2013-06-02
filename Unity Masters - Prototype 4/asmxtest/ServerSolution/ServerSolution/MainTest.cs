@@ -11,10 +11,10 @@ using System.Collections.Generic;
         List<float> weights = new List<float>();
 		Random r = new Random();
 		int id = 0;
-		int current =0;
+		int current = 0;
 		bool newPop = false;
-		float crossoverRate = 0.25;
-		float mutationRate = 0.08;
+		float crossoverRate = 0.25f;
+		float mutationRate = 0.08f;
 		
         void Setup()
         {
@@ -129,6 +129,7 @@ using System.Collections.Generic;
                 i++;
             }
         }
+	
         public float Run(int num)
         {
             Setup();

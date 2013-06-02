@@ -7,12 +7,19 @@ using System.Collections.Generic;
     {
         List<Connection> connections = new List<Connection>();
         List<Neuron> neurons = new List<Neuron>();
+		List<Chromosome> population = new List<Chromosome>();
         List<float> weights = new List<float>();
-
+		Random r = new Random();
+		int id = 0;
+		int current =0;
+		bool newPop = false;
+		float crossoverRate = 0.25;
+		float mutationRate = 0.08;
+		
         void Setup()
         {
 
-
+		
             Connection input1_hidden1 = new Connection();
             Connection input1_hidden2 = new Connection();
             Connection input1_hidden3 = new Connection();
@@ -118,26 +125,133 @@ using System.Collections.Generic;
             int i = 0;
             foreach (Connection c in connections)
             {
-                c.SetWeight(weights[i]);
+                c.SetWeight(population[current].genes[i]);
                 i++;
             }
         }
+	
         public float Run(int num)
         {
             Setup();
             DefaultWeights();
             SetWeights();
             neurons[0].RecieveData(num);
-            neurons[1].RecieveData(num);
+            neurons[1].RecieveData(1);
           //  Console.WriteLine("Finished is " + neurons[neurons.Count-1].GetOutput());
+		
+		
     		return neurons[neurons.Count-1].GetOutput() ;   
 	}
+	
+	public void GeneratePopulation(int size){
+		for(int i = 0;i<size;i++){
+			Chromosome c = new Chromosome(id);
+			for(int j=0;j<connections.Count;j++){
+				c.AddGene(r.NextDouble());
+				
+			}
+			population.Add(c);
+			id++;
+		}
+	}
+	
+	public void ChangeChromosome(){
+			current++;
+			DefaultWeights();
+		
+		if(current => connections.Count){
+			List<Chromosome> newPop = List<Chromosome>();
+			population.Sort();
+			int removeAmount = connections.Count * crossoverRate;
+			for (int i = 0; i < connections.Count; i++)
+                {
+                    if (i >= removeAmount)
+                        population.RemoveAt(i);
+                }
+			for(int i =0;i<current - (current*crossoverRate);i++){
+				Chromosome p1 = TSelection();
+				Chromosome p2 = TSelection();
+				while(p1.id == p2.id){
+					 p2 = TSelection();
+				}
+				Chromosome child =  Crossover(p1,p2);
+				Chromosome mChild = Mutation(child);
+				newPop.Add(mChild);
+			}
+			for(int i=0;i< newPop.Count;i++){
+				population[removeAmount + i] = newPop[i];	
+			}
+			current *= crossoverRate;
+			
+		}
+			SetWeights();
+	}
+	
+	public Chromosome TSelection(){
+		Chromosome parent1;
+		Chromosome parent2;
+		
+		parent1 = population[r.Next(0,population.Count)];
+		parent2 = population[r.Next(0,population.Count)];
+			
+		while(parent2.id == parent1.id){
+			parent2 = population[r.Next(0,population.Count)];
+			
+		}
+			if(parent1.fitness > parent2.fitness){
+			return parent1;
+			
+			
+		}
+		else{
+			return parent2;	
+			
+		}
+	}
+	
+	public Chromosome Crossover(Chromosome parent1, Chromosome parent2){
+		int random = r.Next(parent1.genes.Count);
+		Chromosome child = new Chromosome(id);
+		id++;
+		
+		for(int i =0; i< random;i++){
+			child.AddGene(parent1.genes[i]);	
+		}
+		for (int i = random; i<parent1.genes.Count;i++){
+			child.AddGene(parent2.genes[i]);	
+		}
+		
+		return child;
+	}
+	
+	public Chromosome Mutation(Chromosome original){
+		Chromosome mChild = new Chromosome(original.id);
+		for(int i =0;i<original.genes.Count;i++){
+			if(r.NextDouble()< mutationRate){
+				mChild.AddGene(r.NextDouble());	
+			}
+			else{
+				mChild.AddGene(original.genes[i]);	
+			}
+				
+		}
+			return mChild;
+			
+		
+	}
 
-        void DefaultWeights()
+	
+	public void RecieveFitness(int fit){
+		population[current].IncreaseFitness(fit);
+		Console.WriteLine(population[current].fitness);
+	}
+	
+	void DefaultWeights()
         {
             foreach (Connection c in connections)
             {
                 weights.Add(1);
             }
         }
-    }
+	
+}

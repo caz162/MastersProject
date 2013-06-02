@@ -13,7 +13,7 @@ public class ClientObject : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 	service = new MyService();
-
+	
 	}
 	
 	// Update is called once per frame

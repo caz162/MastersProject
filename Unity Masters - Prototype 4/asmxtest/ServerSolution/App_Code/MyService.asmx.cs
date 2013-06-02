@@ -1,5 +1,6 @@
 using System;
 using System.Web.Services;
+
 using System.Collections.Generic;
 
 	public enum NeuronPlace  {input, bias, hidden, output};
@@ -9,6 +10,10 @@ using System.Collections.Generic;
 
 public class MyService
 {	
+	[WebAttribute]
+	MainTest test;
+	
+	
 	[WebMethod]
 	public int Add(int a, int b){
 		return a+b;
@@ -21,11 +26,23 @@ public class MyService
     }
 	
 	[WebMethod]
+	public void SetupNN(){
+		test = new MainTest();
+	}
+	
+	[WebMethod]
+	public void NextItem(){
+		test.ChangeChromosome();
+	}
+	
+	[WebMethod]
 	public float RunNN(int num){
-		MainTest t = new MainTest();
-		
+		float value1 = test.Run(num);
+		if(num = 3){
+			test.RecieveFitness(1);
+		}
 		//Console.WriteLine(t.Run());
-		return t.Run(num);
+		return value1;
 	}
 
     [WebMethod]
