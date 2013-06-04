@@ -9,10 +9,11 @@ public class ClientObject : MonoBehaviour {
 	Vector3 direction;
 	Random r = new Random();
 	bool change = true;
+	bool firstTime = true;
 		
 	// Use this for initialization
-	void Start () {
-	service = new MyService();
+	void Awake () {
+		service = new MyService();
 		service.SetupNN();
 	
 	}
@@ -27,9 +28,18 @@ public class ClientObject : MonoBehaviour {
 		change = true;
 	}
 	
+	IEnumerator Delay(){
+		yield return new WaitForSeconds(5);	
+		firstTime = false;
+	}
+	
 	// Update is called once per frame
 	void Update () {
 		
+		if(firstTime){
+			StartCoroutine(Delay());	
+		}
+		if(firstTime == false){
 		if(change){
 			Debug.Log("change called");
 			StartCoroutine(ChangeChromosome());	
@@ -49,5 +59,6 @@ public class ClientObject : MonoBehaviour {
 		//Debug.Log(n);
 		//Debug.Log(service.RunNN());
 		
+	}
 	}
 }

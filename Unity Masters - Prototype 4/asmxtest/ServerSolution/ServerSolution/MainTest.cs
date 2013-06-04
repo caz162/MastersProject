@@ -13,8 +13,10 @@ class MainTest
 	int current = 0;
 	bool newPop = false;
 	float crossoverRate = 0.25f;
+
 	float mutationRate = 0.08f;
-		
+	bool canRun = false;
+	
 	void Setup ()
 	{
 
@@ -117,6 +119,7 @@ class MainTest
 		neurons.Add (hidden4);
 		neurons.Add (hidden5);
 		neurons.Add (output1);
+		canRun = true;
 	}
 	
 	void SetWeights ()
@@ -130,20 +133,33 @@ class MainTest
 	
 	public void defaultSetup(){
 		Setup();
+		Console.WriteLine("current items in neurons" + neurons.Count);
+		Console.WriteLine("current items in connections" + connections.Count);
+		
+		
 		DefaultWeights();
 		GeneratePopulation(100);
+		Console.WriteLine("current items in population" + population.Count);
+		
 		SetWeights();
 		//SetWeights();
 	}
 	
 	public float Run (int num)
 	{
+		Console.WriteLine("recieved data"+num);
+	
+		Console.WriteLine("Neurons" + neurons.Count);
+		Console.WriteLine("Connections" + connections.Count);
+		Console.WriteLine("Population" + population.Count);
+		
 		neurons [0].RecieveData (num);
 		neurons [1].RecieveData (1);
+		
 		//  Console.WriteLine("Finished is " + neurons[neurons.Count-1].GetOutput());
 		
 		
-		return neurons [neurons.Count - 1].GetOutput () ;   
+		return neurons[neurons.Count-1].GetOutput() ; 
 	}
 	
 	public void GeneratePopulation (int size)
