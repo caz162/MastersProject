@@ -8,11 +8,11 @@ public class Wander : MonoBehaviour {
 	Vector3 direction;
 	Random rand = new Random();
 	float randomDirection;
-	MyService service;
+	//MyService service;
 	
 	// Use this for initialization
 	void Start () {
-	service = new MyService();
+	//service = new MyService();
 	}
 	
 	// Update is called once per frame

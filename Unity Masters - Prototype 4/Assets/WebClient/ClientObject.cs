@@ -8,16 +8,33 @@ public class ClientObject : MonoBehaviour {
 		int speed =10;
 	Vector3 direction;
 	Random r = new Random();
-		
+	bool change = true;
 		
 	// Use this for initialization
 	void Start () {
 	service = new MyService();
+		service.SetupNN();
 	
+	}
+	
+	IEnumerator ChangeChromosome(){
+		change = false;
+		Debug.Log("waiting");
+		yield return new WaitForSeconds(10);
+		transform.position = new Vector3(-6.360526f,1,3.495263f);
+		Debug.Log("should have reset");
+		service.NextItem();
+		change = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		
+		if(change){
+			Debug.Log("change called");
+			StartCoroutine(ChangeChromosome());	
+		}
+		
 		rigidbody.velocity = Vector3.zero;
 		RaycastHit hit;
 		if(Physics.Raycast(transform.position,transform.TransformDirection( Vector3.forward), out hit,1000.0f)){
@@ -31,5 +48,6 @@ public class ClientObject : MonoBehaviour {
 		transform.Translate(Vector3.forward * (Time.deltaTime* speed));
 		//Debug.Log(n);
 		//Debug.Log(service.RunNN());
+		
 	}
 }

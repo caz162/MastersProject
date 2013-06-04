@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 public class MyService
 {	
-	[WebAttribute]
+	//[WebAttribute]
 	MainTest test;
 	
 	
@@ -28,6 +28,7 @@ public class MyService
 	[WebMethod]
 	public void SetupNN(){
 		test = new MainTest();
+		test.defaultSetup();
 	}
 	
 	[WebMethod]
@@ -38,7 +39,7 @@ public class MyService
 	[WebMethod]
 	public float RunNN(int num){
 		float value1 = test.Run(num);
-		if(num = 3){
+		if(num == 3){
 			test.RecieveFitness(1);
 		}
 		//Console.WriteLine(t.Run());

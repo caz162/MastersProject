@@ -24,6 +24,10 @@ public partial class MyService : System.Web.Services.Protocols.SoapHttpClientPro
     
     private System.Threading.SendOrPostCallback PrintOperationCompleted;
     
+    private System.Threading.SendOrPostCallback SetupNNOperationCompleted;
+    
+    private System.Threading.SendOrPostCallback NextItemOperationCompleted;
+    
     private System.Threading.SendOrPostCallback RunNNOperationCompleted;
     
     private System.Threading.SendOrPostCallback RandOperationCompleted;
@@ -35,6 +39,10 @@ public partial class MyService : System.Web.Services.Protocols.SoapHttpClientPro
     public event AddCompletedEventHandler AddCompleted;
     
     public event PrintCompletedEventHandler PrintCompleted;
+    
+    public event SetupNNCompletedEventHandler SetupNNCompleted;
+    
+    public event NextItemCompletedEventHandler NextItemCompleted;
     
     public event RunNNCompletedEventHandler RunNNCompleted;
     
@@ -107,6 +115,68 @@ public partial class MyService : System.Web.Services.Protocols.SoapHttpClientPro
         if ((this.PrintCompleted != null)) {
             System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
             this.PrintCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+        }
+    }
+    
+    [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/MyService/SetupNN", RequestNamespace="http://tempuri.org/MyService", ResponseNamespace="http://tempuri.org/MyService", ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped, Use=System.Web.Services.Description.SoapBindingUse.Literal)]
+    public void SetupNN() {
+        this.Invoke("SetupNN", new object[0]);
+    }
+    
+    public System.IAsyncResult BeginSetupNN(System.AsyncCallback callback, object asyncState) {
+        return this.BeginInvoke("SetupNN", new object[0], callback, asyncState);
+    }
+    
+    public void EndSetupNN(System.IAsyncResult asyncResult) {
+        this.EndInvoke(asyncResult);
+    }
+    
+    public void SetupNNAsync() {
+        this.SetupNNAsync(null);
+    }
+    
+    public void SetupNNAsync(object userState) {
+        if ((this.SetupNNOperationCompleted == null)) {
+            this.SetupNNOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSetupNNCompleted);
+        }
+        this.InvokeAsync("SetupNN", new object[0], this.SetupNNOperationCompleted, userState);
+    }
+    
+    private void OnSetupNNCompleted(object arg) {
+        if ((this.SetupNNCompleted != null)) {
+            System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+            this.SetupNNCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+        }
+    }
+    
+    [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/MyService/NextItem", RequestNamespace="http://tempuri.org/MyService", ResponseNamespace="http://tempuri.org/MyService", ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped, Use=System.Web.Services.Description.SoapBindingUse.Literal)]
+    public void NextItem() {
+        this.Invoke("NextItem", new object[0]);
+    }
+    
+    public System.IAsyncResult BeginNextItem(System.AsyncCallback callback, object asyncState) {
+        return this.BeginInvoke("NextItem", new object[0], callback, asyncState);
+    }
+    
+    public void EndNextItem(System.IAsyncResult asyncResult) {
+        this.EndInvoke(asyncResult);
+    }
+    
+    public void NextItemAsync() {
+        this.NextItemAsync(null);
+    }
+    
+    public void NextItemAsync(object userState) {
+        if ((this.NextItemOperationCompleted == null)) {
+            this.NextItemOperationCompleted = new System.Threading.SendOrPostCallback(this.OnNextItemCompleted);
+        }
+        this.InvokeAsync("NextItem", new object[0], this.NextItemOperationCompleted, userState);
+    }
+    
+    private void OnNextItemCompleted(object arg) {
+        if ((this.NextItemCompleted != null)) {
+            System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+            this.NextItemCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
         }
     }
     
@@ -218,6 +288,10 @@ public partial class AddCompletedEventArgs : System.ComponentModel.AsyncComplete
 public delegate void AddCompletedEventHandler(object sender, AddCompletedEventArgs args);
 
 public delegate void PrintCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs args);
+
+public delegate void SetupNNCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs args);
+
+public delegate void NextItemCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs args);
 
 public partial class RunNNCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
     
