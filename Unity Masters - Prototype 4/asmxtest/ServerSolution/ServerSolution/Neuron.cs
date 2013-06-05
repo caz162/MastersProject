@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 class Neuron
     {
-        float inputNum;
+        float inputNum = 0;
         List<Connection> inputConnections = new List<Connection>();
         List<Connection> outputConnections = new List<Connection>();
         float outputNum = 0;
