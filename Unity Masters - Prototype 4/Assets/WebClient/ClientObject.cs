@@ -52,6 +52,7 @@ public class ClientObject : MonoBehaviour {
 			float distance = hit.distance;
 			Debug.DrawRay(transform.position, transform.TransformDirection( Vector3.forward) * hit.distance,Color.red);
 		}
+			//Debug.Log("running");
 		float b = service.RunNN(int.Parse( hit.collider.tag));
 		
 		transform.Rotate(new Vector3(0, direction.y + b,0));

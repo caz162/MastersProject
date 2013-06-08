@@ -11,7 +11,7 @@ using System.Collections.Generic;
 public class MyService
 {	
 	//[WebAttribute]
-	MainTest test = new MainTest();
+	static MainTest test = new MainTest();
 	
 	
 	[WebMethod]
@@ -27,7 +27,7 @@ public class MyService
 	
 	[WebMethod]
 	public void SetupNN(){
-		//test = new MainTest();
+		test = new MainTest();
 		test.defaultSetup();
 	}
 	
