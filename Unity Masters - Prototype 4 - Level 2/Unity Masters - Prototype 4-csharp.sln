@@ -1,7 +1,7 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
-Project("{C691EC07-4D7D-3E9E-9D3F-76AE28061FAB}") = "Unity Masters - Prototype 4", "Assembly-CSharp.csproj", "{6A11A404-6440-973F-0266-BA4194E8CAC3}"
+Project("{C691EC07-4D7D-3E9E-9D3F-76AE28061FAB}") = "Unity Masters - Prototype 4", "Assembly-CSharp-vs.csproj", "{6A11A404-6440-973F-0266-BA4194E8CAC3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
