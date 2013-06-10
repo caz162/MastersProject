@@ -1,6 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="ServerSolution\MyService.asmx.cs">
+    <Files>
+      <File FileName="ServerSolution\MainTest.cs" Line="1" Column="1" />
+      <File FileName="ServerSolution\MyService.asmx.cs" Line="55" Column="48" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

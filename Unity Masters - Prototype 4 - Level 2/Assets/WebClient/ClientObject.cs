@@ -59,10 +59,10 @@ public class ClientObject : MonoBehaviour {
 			Debug.DrawRay(transform.position, transform.TransformDirection( Vector3.forward) * hit.distance,Color.red);
 		}
 			//Debug.Log("running");
-		float b = service.RunNN(int.Parse( hit.collider.tag));
+		float b[] = service.RunNN(int.Parse( hit.collider.tag),int.Parse( hit.collider.tag),int.Parse( hit.collider.tag) );
 		
-		transform.Rotate(new Vector3(0, direction.y + b,0));
-		transform.Translate(Vector3.forward * (Time.deltaTime* speed));
+		transform.Rotate(new Vector3(0, direction.y + b[0],0));
+		transform.Translate(Vector3.forward * (Time.deltaTime* b[1]));
 		//Debug.Log(n);
 		//Debug.Log(service.RunNN());
 		

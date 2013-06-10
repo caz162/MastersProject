@@ -37,8 +37,8 @@ public class MyService
 	}
 	
 	[WebMethod]
-	public float RunNN(int num){
-		float value1 = test.Run(num);
+	public float[] RunNN(int num1, int num2, int num3){
+		float[] value1 = test.Run(num1,num2,num3);
 		if(num == 3){
 			test.RecieveFitness(1);
 		}
