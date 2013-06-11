@@ -18,11 +18,11 @@ public class Wander : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	//	randomDirection = service.RunNN();
-		//randomDirection = Random.Range(-10,10);	
+		randomDirection = UnityEngine.Random.Range(-10,10);	
 		
 		//direction.x = direction.x + randomDirection;
-	//	transform.Rotate(new Vector3(0, direction.y + randomDirection,0));
-//		transform.Translate(Vector3.forward * (Time.deltaTime* speed));
+		transform.Rotate(new Vector3(0, direction.y + randomDirection,0));
+		transform.Translate(Vector3.forward * (Time.deltaTime* speed));
 			
 	}
 }

@@ -10,7 +10,7 @@ public class ClientObject : MonoBehaviour {
 	Random r = new Random();
 	bool change = true;
 	bool firstTime = true;
-		
+	Quaternion rotation = new Quaternion(0,0,0,0);	
 	// Use this for initialization
 	void Awake () {
 		service = new MyService();
@@ -23,6 +23,8 @@ public class ClientObject : MonoBehaviour {
 		Debug.Log("waiting");
 		yield return new WaitForSeconds(10);
 		transform.position = new Vector3(-6.360526f,1,3.495263f);
+		transform.rotation = rotation;
+		
 		Debug.Log("should have reset");
 		service.NextItem();
 		change = true;
