@@ -1,7 +1,10 @@
 using System;
 using System.Web.Services;
 using System.Collections.Generic;
- 
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters;
+
 class MainTest
 {
 	List<Connection> connections = new List<Connection> ();
@@ -16,6 +19,7 @@ class MainTest
 
 	float mutationRate = 0.08f;
 	bool canRun = false;
+	int generations = 10;
 	
 	void Setup ()
 	{
@@ -145,6 +149,16 @@ class MainTest
 		//SetWeights();
 	}
 	
+	public void Save(){
+		StreamWriter sw = new StreamWriter("file.txt");
+		for(int i=0;i<population[current].genes.Count;i++){
+			sw.WriteLine(population[current].genes[i]);
+		}
+		
+	sw.Close();
+
+	}
+	
 	public float Run (int num)
 	{
 		Console.WriteLine("recieved data"+num);
@@ -177,8 +191,11 @@ class MainTest
 	
 	public void ChangeChromosome ()
 	{
+		
+		if(genCounter<generations){
 		current++;
 		DefaultWeights ();
+		
 		
 		if (current >= connections.Count) {
 			List<Chromosome> newPop = new List<Chromosome> ();
@@ -207,6 +224,13 @@ class MainTest
 		
 		current =(int)( current * crossoverRate);
 		SetWeights ();
+		}
+		else{
+			population.Sort();
+			current =0;
+			Save();
+			SetWeights();
+		}
 	}
 	
 	public Chromosome TSelection ()
