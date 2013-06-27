@@ -43,9 +43,9 @@ public class MyService
 	
 	//Running the nerual network
 	[WebMethod]
-	public float RunNN(int num){
-		float value1 = test.Run(num);
-		if(num == 3){
+	public float[] RunNN(int num1, int num2, int num3){
+		float[] value1 = test.Run(num1, num2,num3);
+		if(num2 == 3){
 			test.RecieveFitness(1);
 		}
 		//Console.WriteLine(t.Run());

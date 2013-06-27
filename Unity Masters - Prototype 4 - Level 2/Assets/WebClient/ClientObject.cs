@@ -5,7 +5,7 @@ public class ClientObject : MonoBehaviour {
 	
 	MyService service;
 	int i =0;
-		int speed =10;
+	int speed =10;
 	Vector3 direction;
 	Random r = new Random();
 	bool change = true;
@@ -52,14 +52,29 @@ public class ClientObject : MonoBehaviour {
 		}
 		
 		rigidbody.velocity = Vector3.zero;
-		RaycastHit hit;
-		if(Physics.Raycast(transform.position,transform.TransformDirection( Vector3.forward), out hit,1000.0f)){
-			string objectAimed = hit.collider.name;
-			float distance = hit.distance;
-			Debug.DrawRay(transform.position, transform.TransformDirection( Vector3.forward) * hit.distance,Color.red);
+			
+		RaycastHit hit1;
+		if(Physics.Raycast(transform.position,transform.TransformDirection( new Vector3(0,0,1)), out hit1,1000.0f)){
+			string objectAimed = hit1.collider.name;
+			float distance = hit1.distance;
+			Debug.DrawRay(transform.position, transform.TransformDirection( new Vector3(0,0,1)) * hit1.distance,Color.red);
+		}
+			
+		RaycastHit hit2;
+		if(Physics.Raycast(transform.position,transform.TransformDirection( new Vector3(-1,0,1)), out hit2,1000.0f)){
+			string objectAimed = hit2.collider.name;
+			float distance = hit2.distance;
+			Debug.DrawRay(transform.position, transform.TransformDirection( new Vector3(-1,0,1)) * hit2.distance,Color.blue);
+		}
+			
+		RaycastHit hit3;
+		if(Physics.Raycast(transform.position,transform.TransformDirection( new Vector3(1,0,1)), out hit3,1000.0f)){
+			string objectAimed = hit3.collider.name;
+			float distance = hit3.distance;
+			Debug.DrawRay(transform.position, transform.TransformDirection( new Vector3(1,0,1)) * hit3.distance,Color.green);
 		}
 			//Debug.Log("running");
-		float b[] = service.RunNN(int.Parse( hit.collider.tag),int.Parse( hit.collider.tag),int.Parse( hit.collider.tag) );
+		float[] b = service.RunNN(int.Parse( hit1.collider.tag),int.Parse( hit2.collider.tag),int.Parse( hit3.collider.tag) );
 		
 		transform.Rotate(new Vector3(0, direction.y + b[0],0));
 		transform.Translate(Vector3.forward * (Time.deltaTime* b[1]));

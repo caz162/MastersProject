@@ -181,32 +181,39 @@ public partial class MyService : System.Web.Services.Protocols.SoapHttpClientPro
     }
     
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/MyService/RunNN", RequestNamespace="http://tempuri.org/MyService", ResponseNamespace="http://tempuri.org/MyService", ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped, Use=System.Web.Services.Description.SoapBindingUse.Literal)]
-    public float RunNN(int num) {
+    [return: System.Xml.Serialization.XmlArrayItem(IsNullable=false)]
+    public float[] RunNN(int num1, int num2, int num3) {
         object[] results = this.Invoke("RunNN", new object[] {
-                    num});
-        return ((float)(results[0]));
+                    num1,
+                    num2,
+                    num3});
+        return ((float[])(results[0]));
     }
     
-    public System.IAsyncResult BeginRunNN(int num, System.AsyncCallback callback, object asyncState) {
+    public System.IAsyncResult BeginRunNN(int num1, int num2, int num3, System.AsyncCallback callback, object asyncState) {
         return this.BeginInvoke("RunNN", new object[] {
-                    num}, callback, asyncState);
+                    num1,
+                    num2,
+                    num3}, callback, asyncState);
     }
     
-    public float EndRunNN(System.IAsyncResult asyncResult) {
+    public float[] EndRunNN(System.IAsyncResult asyncResult) {
         object[] results = this.EndInvoke(asyncResult);
-        return ((float)(results[0]));
+        return ((float[])(results[0]));
     }
     
-    public void RunNNAsync(int num) {
-        this.RunNNAsync(num, null);
+    public void RunNNAsync(int num1, int num2, int num3) {
+        this.RunNNAsync(num1, num2, num3, null);
     }
     
-    public void RunNNAsync(int num, object userState) {
+    public void RunNNAsync(int num1, int num2, int num3, object userState) {
         if ((this.RunNNOperationCompleted == null)) {
             this.RunNNOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRunNNCompleted);
         }
         this.InvokeAsync("RunNN", new object[] {
-                    num}, this.RunNNOperationCompleted, userState);
+                    num1,
+                    num2,
+                    num3}, this.RunNNOperationCompleted, userState);
     }
     
     private void OnRunNNCompleted(object arg) {
@@ -302,10 +309,10 @@ public partial class RunNNCompletedEventArgs : System.ComponentModel.AsyncComple
         this.results = results;
     }
     
-    public float Result {
+    public float[] Result {
         get {
             this.RaiseExceptionIfNecessary();
-            return ((float)(this.results[0]));
+            return ((float[])(this.results[0]));
         }
     }
 }
