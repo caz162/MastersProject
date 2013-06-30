@@ -260,14 +260,10 @@ class MainTest
 	}
 	
 	public void defaultSetup(){
-		Setup();
-		Console.WriteLine("current items in neurons" + neurons.Count);
-		Console.WriteLine("current items in connections" + connections.Count);
-		
+		Setup();	
 		
 		DefaultWeights();
 		GeneratePopulation(100);
-		Console.WriteLine("current items in population" + population.Count);
 		
 		SetWeights();
 		//SetWeights();
@@ -286,10 +282,8 @@ class MainTest
 	public float[] Run (int num1, int num2, int num3)
 	{
 		Console.WriteLine("recieved data"+num1);
-	
-		Console.WriteLine("Neurons" + neurons.Count);
-		Console.WriteLine("Connections" + connections.Count);
-		Console.WriteLine("Population" + population.Count);
+		Console.WriteLine("recieved data"+num2);
+		Console.WriteLine("recieved data"+num3);
 		
 		for (int i =0; i<6; i+=2) {
 			if (i == 0) {
@@ -320,7 +314,7 @@ class MainTest
 		for (int i = 0; i<size; i++) {
 			Chromosome c = new Chromosome (id);
 			for (int j=0; j<connections.Count; j++) {
-				c.AddGene (r.NextDouble ());
+				c.AddGene (r.Next(-10,10));
 				
 			}
 			population.Add (c);
