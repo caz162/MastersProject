@@ -10,6 +10,8 @@ public class ClientObject : MonoBehaviour {
 	Random r = new Random();
 	bool change = true;
 	bool firstTime = true;
+	bool hit = false;
+	
 		
 	// Use this for initialization
 	void Awake () {
@@ -20,6 +22,12 @@ public class ClientObject : MonoBehaviour {
 	
 	void Hit(int i){
 		
+	}
+ 	void OnTriggerEnter(Collider other) {
+		if(other.gameObject.tag == "2"){
+		hit = true;	
+			Destroy(other.gameObject);
+		}
 	}
 	
 	IEnumerator ChangeChromosome(){
@@ -75,9 +83,12 @@ public class ClientObject : MonoBehaviour {
 		}
 			//Debug.Log("running");
 		float[] b = service.RunNN(int.Parse( hit1.collider.tag),int.Parse( hit2.collider.tag),int.Parse( hit3.collider.tag) );
-		
+		if(hit){
+				service.IncreaseFitness();
+				hit=false;
+			}
 		transform.Rotate(new Vector3(0, direction.y + b[0],0));
-		transform.Translate(Vector3.forward * (Time.deltaTime* b[1]));
+		transform.Translate(Vector3.forward * (Time.deltaTime* (b[1]*5)));
 		//Debug.Log(n);
 		//Debug.Log(service.RunNN());
 		
