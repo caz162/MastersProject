@@ -5,11 +5,11 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{437FAF52-0A84-0E6F-3A6E-CE2F4A197304}</ProjectGuid>
+	<ProjectGuid>{F9B9E5B7-5F6C-4777-EE13-2C5B21CA08FD}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
-	<AssemblyName>Assembly-CSharp</AssemblyName>
+	<AssemblyName>Assembly-UnityScript</AssemblyName>
 	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
 	<FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -44,17 +44,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Neural Network\Connections.cs" />
-     <Compile Include="Assets\Neural Network\NN.cs" />
-     <Compile Include="Assets\Neural Network\Neural Network.cs" />
-     <Compile Include="Assets\Neural Network\Neuron.cs" />
-     <Compile Include="Assets\ObjectScript.cs" />
-     <Compile Include="Assets\Prefabs\PlayerScript.cs" />
-     <Compile Include="Assets\Prefabs\Raycasting.cs" />
-     <Compile Include="Assets\Prefabs\Wander.cs" />
-     <Compile Include="Assets\Training.cs" />
-     <Compile Include="Assets\WebClient\ClientObject.cs" />
-     <Compile Include="Assets\WebClient\MyService.cs" />
+     <Compile Include="Assets\GenerateObjects.js" />
  <Reference Include="System.Web">
  <HintPath>Assets\Plugins\System.Web.dll</HintPath>
  </Reference>

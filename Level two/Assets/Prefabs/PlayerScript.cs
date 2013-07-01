@@ -18,4 +18,6 @@ public class PlayerScript : MonoBehaviour {
 		transform.Rotate(0,rotate,0);
 		transform.Translate(0,0,x);
 	}
+	
+
 }

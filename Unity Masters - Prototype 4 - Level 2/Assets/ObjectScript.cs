@@ -12,9 +12,10 @@ public class ObjectScript : MonoBehaviour {
 	void Update () {
 	
 	}
-	void OnCollisionEnter(Collision collision) {
-		if (collision.gameObject.tag == "2"){
-			collision.gameObject.SendMessage("Hit",1);
+	  void OnCollisionEnter(Collision collision) {
+		if(collision.gameObject.tag == "3"){
+		Debug.Log("destroying");
+		Destroy(this.gameObject);
 		}
 	}
 	

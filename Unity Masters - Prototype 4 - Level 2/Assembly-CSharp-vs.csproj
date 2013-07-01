@@ -44,7 +44,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\GenerateObjects.cs" />
      <Compile Include="Assets\Neural Network\Connections.cs" />
      <Compile Include="Assets\Neural Network\NN.cs" />
      <Compile Include="Assets\Neural Network\Neural Network.cs" />

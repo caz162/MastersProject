@@ -45,14 +45,9 @@ public class MyService
 	[WebMethod]
 	public float[] RunNN(int num1, int num2, int num3){
 		float[] value1 = test.Run(num1, num2,num3);
-		
+
 		//Console.WriteLine(t.Run());
 		return value1;
-	}
-	
-	[WebMethod]
-	public void IncreaseFitness(){
-		test.RecieveFitness(1);	
 	}
 	
 	//Returns a random number between two numbers.

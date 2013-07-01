@@ -1,9 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Prefabs\Wander.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\ObjectScript.cs">
     <Files>
-      <File FileName="asmxtest\ServerSolution\App_Code\MainTest.cs" Line="307" Column="47" />
-      <File FileName="Assets\Prefabs\Wander.cs" Line="22" Column="3" />
+      <File FileName="Assets\WebClient\ClientObject.cs" Line="14" Column="2" />
+      <File FileName="Assets\GenerateObjects.js" Line="17" Column="38" />
+      <File FileName="Assets\ObjectScript.cs" Line="8" Column="2" />
+      <File FileName="Assets\Prefabs\PlayerScript.cs" Line="22" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

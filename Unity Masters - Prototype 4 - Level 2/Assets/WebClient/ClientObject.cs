@@ -33,6 +33,7 @@ public class ClientObject : MonoBehaviour {
 	IEnumerator ChangeChromosome(){
 		change = false;
 		Debug.Log("waiting");
+		GameObject.Find("Main Camera").SendMessage("Generate");
 		yield return new WaitForSeconds(10);
 		transform.position = new Vector3(-6.360526f,1,3.495263f);
 		Debug.Log("should have reset");
