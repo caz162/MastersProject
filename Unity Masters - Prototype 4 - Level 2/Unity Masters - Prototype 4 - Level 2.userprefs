@@ -1,15 +1,6 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="..\Level two\asmxtest\ServerSolution\App_Code\MainTest.cs">
-    <Files>
-      <File FileName="..\Level two\asmxtest\ServerSolution\App_Code\MainTest.cs" Line="22" Column="23" />
-      <File FileName="Assets\WebClient\ClientObject.cs" Line="14" Column="2" />
-      <File FileName="Assets\GenerateObjects.js" Line="1" Column="1" />
-      <File FileName="Assets\ObjectScript.cs" Line="8" Column="2" />
-      <File FileName="Assets\Prefabs\PlayerScript.cs" Line="1" Column="1" />
-      <File FileName="..\Level two\asmxtest\ServerSolution\App_Code\Chromosome.cs" Line="19" Column="33" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

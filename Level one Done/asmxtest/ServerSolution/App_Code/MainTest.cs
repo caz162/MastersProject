@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters;
+using ServerSolution;
 
 class MainTest
 {
@@ -16,10 +17,10 @@ class MainTest
 	int current = 0;
 	bool newPop = false;
 	float crossoverRate = 0.25f;
-	int popSize =10;
+
 	float mutationRate = 0.08f;
 	bool canRun = false;
-	int generations = 10;
+	int generations = 100;
 	int genCounter = 0;
 	
 	void Setup ()
@@ -263,7 +264,7 @@ class MainTest
 		Setup();	
 		
 		DefaultWeights();
-		GeneratePopulation(popSize);
+		GeneratePopulation(100);
 		
 		SetWeights();
 		//SetWeights();
@@ -279,16 +280,12 @@ class MainTest
 
 	}
 	
-	public float[] Run (int num1, int num2, int num3)
+	public ReturnData Run (int num1, int num2, int num3)
 	{
-		//Console.WriteLine("recieved data"+num1);
-		//Console.WriteLine("recieved data"+num2);
-		//Console.WriteLine("recieved data"+num3);
-		if(num1 == 3){
-			Console.WriteLine("increasing fitness");
-			RecieveFitness(1);	
-		}
-			
+		Console.WriteLine("recieved data"+num1);
+		Console.WriteLine("recieved data"+num2);
+		Console.WriteLine("recieved data"+num3);
+		
 		for (int i =0; i<6; i+=2) {
 			if (i == 0) {
 				neurons [0 + i].RecieveData (num1);
@@ -306,12 +303,11 @@ class MainTest
 		//  Console.WriteLine("Finished is " + neurons[neurons.Count-1].GetOutput());
 		
 			float [] returns = new float[2];
-		//Console.WriteLine(neurons [neurons.Count - 1].GetOutput ());
-		returns [0] = neurons [neurons.Count - 1].GetOutput ();
-		//Console.WriteLine(neurons [neurons.Count - 2].GetOutput ());
-		returns [1] = neurons [neurons.Count - 2].GetOutput ();
 		
-		return returns; 
+		returns [0] = neurons [neurons.Count - 1].GetOutput ();
+		returns [1] = neurons [neurons.Count - 2].GetOutput ();
+		ReturnData r1 = new ReturnData(0,returns);
+		return r1; 
 	}
 	
 	public void GeneratePopulation (int size)
@@ -330,21 +326,18 @@ class MainTest
 	public void ChangeChromosome ()
 	{
 		Console.WriteLine("Fitness " + population[current].fitness);
-		Console.WriteLine("population member" +current);
-		Console.WriteLine("generation" +genCounter);
-		
 		if(genCounter<generations){
 		current++;
 		DefaultWeights ();
 		
-		
-		if (current >= popSize) {
+		genCounter++;
+		if (current >= connections.Count) {
 			List<Chromosome> newPop = new List<Chromosome> ();
 			population.Sort ();
-			int removeAmount = (int)(popSize * crossoverRate);
-			for (int i = 0; i < popSize; i++) {
+			int removeAmount = (int)(connections.Count * crossoverRate);
+			for (int i = 0; i < connections.Count; i++) {
 				if (i >= removeAmount)
-					population.RemoveAt (removeAmount);
+					population.RemoveAt (i);
 			}
 			for (int i =0; i<(current - (current*crossoverRate)); i++) {
 				Chromosome p1 = TSelection ();
@@ -357,14 +350,13 @@ class MainTest
 				newPop.Add (mChild);
 			}
 			for (int i=0; i< newPop.Count; i++) {
-				population.Add(newPop [i]);	
+				population [removeAmount + i] = newPop [i];	
 			}
-			current =(int)( current * crossoverRate);
-				genCounter++;
+			
 		}	
 		
 		
-		
+		current =(int)( current * crossoverRate);
 		SetWeights ();
 		}
 		else{
@@ -432,7 +424,7 @@ class MainTest
 	public void RecieveFitness (int fit)
 	{
 		population [current].IncreaseFitness (fit);
-		Console.WriteLine ("Fitness has increased by " + population [current].fitness);
+		Console.WriteLine (population [current].fitness);
 	}
 	
 	void DefaultWeights ()

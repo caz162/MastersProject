@@ -38,5 +38,6 @@
     <Compile Include="MainTest.cs" />
     <Compile Include="MyService.asmx.cs" />
     <Compile Include="Neuron.cs" />
+    <Compile Include="ReturnData.cs" />
   </ItemGroup>
 </Project>

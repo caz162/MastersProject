@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters;
+using ServerSolution;
 
 class MainTest
 {
@@ -279,7 +280,7 @@ class MainTest
 
 	}
 	
-	public float[] Run (int num1, int num2, int num3)
+	public ReturnData Run (int num1, int num2, int num3)
 	{
 		Console.WriteLine("recieved data"+num1);
 		Console.WriteLine("recieved data"+num2);
@@ -305,8 +306,8 @@ class MainTest
 		
 		returns [0] = neurons [neurons.Count - 1].GetOutput ();
 		returns [1] = neurons [neurons.Count - 2].GetOutput ();
-		
-		return returns; 
+		ReturnData r1 = new ReturnData(0,returns);
+		return r1; 
 	}
 	
 	public void GeneratePopulation (int size)
