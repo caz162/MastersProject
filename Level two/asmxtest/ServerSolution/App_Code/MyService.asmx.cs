@@ -43,8 +43,8 @@ public class MyService
 	
 	//Running the nerual network
 	[WebMethod]
-	public float[] RunNN(int num1, int num2, int num3){
-		float[] value1 = test.Run(num1, num2,num3);
+	public float[] RunNN(int num1, int num2, int num3, bool hit){
+		float[] value1 = test.Run(num1, num2,num3,hit);
 
 		//Console.WriteLine(t.Run());
 		return value1;

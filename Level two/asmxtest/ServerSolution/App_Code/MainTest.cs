@@ -16,7 +16,7 @@ class MainTest
 	int current = 0;
 	bool newPop = false;
 	float crossoverRate = 0.25f;
-	int popSize =10;
+	int popSize = 10;
 	float mutationRate = 0.08f;
 	bool canRun = false;
 	int generations = 10;
@@ -259,36 +259,38 @@ class MainTest
 		}
 	}
 	
-	public void defaultSetup(){
-		Setup();	
+	public void defaultSetup ()
+	{
+		Setup ();	
 		
-		DefaultWeights();
-		GeneratePopulation(popSize);
+		DefaultWeights ();
+		GeneratePopulation (popSize);
 		
-		SetWeights();
+		SetWeights ();
 		//SetWeights();
 	}
 	
-	public void Save(){
-		StreamWriter sw = new StreamWriter("file.txt");
-		for(int i=0;i<population[current].genes.Count;i++){
-			sw.WriteLine(population[current].genes[i]);
+	public void Save ()
+	{
+		StreamWriter sw = new StreamWriter ("file.txt");
+		for (int i=0; i<population[current].genes.Count; i++) {
+			sw.WriteLine (population [current].genes [i]);
 		}
 		
-	sw.Close();
+		sw.Close ();
 
 	}
 	
-	public float[] Run (int num1, int num2, int num3)
+	public float[] Run (int num1, int num2, int num3, bool hit)
 	{
 		//Console.WriteLine("recieved data"+num1);
 		//Console.WriteLine("recieved data"+num2);
 		//Console.WriteLine("recieved data"+num3);
-		if(num1 == 3){
+		/*	if(num1 == 3){
 			Console.WriteLine("increasing fitness");
 			RecieveFitness(1);	
 		}
-			
+			*/
 		for (int i =0; i<6; i+=2) {
 			if (i == 0) {
 				neurons [0 + i].RecieveData (num1);
@@ -304,8 +306,12 @@ class MainTest
 		}
 		
 		//  Console.WriteLine("Finished is " + neurons[neurons.Count-1].GetOutput());
-		
-			float [] returns = new float[2];
+		if(hit){
+			//Console.WriteLine("fitness");
+			Console.WriteLine ("adding");
+				RecieveFitness(1);
+		}
+		float [] returns = new float[2];
 		//Console.WriteLine(neurons [neurons.Count - 1].GetOutput ());
 		returns [0] = neurons [neurons.Count - 1].GetOutput ();
 		//Console.WriteLine(neurons [neurons.Count - 2].GetOutput ());
@@ -319,7 +325,7 @@ class MainTest
 		for (int i = 0; i<size; i++) {
 			Chromosome c = new Chromosome (id);
 			for (int j=0; j<connections.Count; j++) {
-				c.AddGene (r.Next(-10,10));
+				c.AddGene (r.Next (-10, 10));
 				
 			}
 			population.Add (c);
@@ -329,49 +335,58 @@ class MainTest
 	
 	public void ChangeChromosome ()
 	{
-		Console.WriteLine("Fitness " + population[current].fitness);
-		Console.WriteLine("population member" +current);
-		Console.WriteLine("generation" +genCounter);
+		Console.WriteLine ("Fitness " + population [current].fitness);
+		Console.WriteLine ("population member" + current);
+		Console.WriteLine ("generation" + genCounter);
 		
-		if(genCounter<generations){
-		current++;
-		DefaultWeights ();
+		if (genCounter < generations) {
+			current++;
+			DefaultWeights ();
 		
 		
-		if (current >= popSize) {
-			List<Chromosome> newPop = new List<Chromosome> ();
-			population.Sort ();
-			int removeAmount = (int)(popSize * crossoverRate);
-			for (int i = 0; i < popSize; i++) {
-				if (i >= removeAmount)
-					population.RemoveAt (removeAmount);
-			}
-			for (int i =0; i<(current - (current*crossoverRate)); i++) {
-				Chromosome p1 = TSelection ();
-				Chromosome p2 = TSelection ();
-				while (p1.id == p2.id) {
-					p2 = TSelection ();
+			if (current >= popSize) {
+				List<Chromosome> newPop = new List<Chromosome> ();
+				population.Sort ();
+				population.Reverse();
+				Console.WriteLine ("Fitnesses");
+				for (int i=0; i<population.Count; i++) {
+					Console.WriteLine ("" + population [i].fitness);	
 				}
-				Chromosome child = Crossover (p1, p2);
-				Chromosome mChild = Mutation (child);
-				newPop.Add (mChild);
-			}
-			for (int i=0; i< newPop.Count; i++) {
-				population.Add(newPop [i]);	
-			}
-			current =(int)( current * crossoverRate);
+				
+				using (StreamWriter writer = new StreamWriter("results.txt",true)) {
+					writer.WriteLine (population [0].fitness);
+					writer.Close ();
+				}
+				int removeAmount = (int)(popSize * crossoverRate);
+				for (int i = 0; i < popSize; i++) {
+					if (i >= removeAmount)
+						population.RemoveAt (removeAmount);
+				}
+				for (int i =0; i<(current - (current*crossoverRate)); i++) {
+					Chromosome p1 = TSelection ();
+					Chromosome p2 = TSelection ();
+					while (p1.id == p2.id) {
+						p2 = TSelection ();
+					}
+					Chromosome child = Crossover (p1, p2);
+					Chromosome mChild = Mutation (child);
+					newPop.Add (mChild);
+				}
+				for (int i=0; i< newPop.Count; i++) {
+					population.Add (newPop [i]);	
+				}
+				current = (int)(current * crossoverRate);
 				genCounter++;
-		}	
+			}	
 		
 		
 		
-		SetWeights ();
-		}
-		else{
-			population.Sort();
-			current =0;
-			Save();
-			SetWeights();
+			SetWeights ();
+		} else {
+			population.Sort ();
+			current = 0;
+			Save ();
+			SetWeights ();
 		}
 	}
 	

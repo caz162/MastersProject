@@ -17,12 +17,12 @@ class MainTest
 	int current = 0;
 	bool newPop = false;
 	float crossoverRate = 0.25f;
-
+	int popSize =10;
 	float mutationRate = 0.08f;
 	bool canRun = false;
 	int generations = 100;
 	int genCounter = 0;
-	
+	StreamWriter sw = new StreamWriter("results.txt",true);
 	void Setup ()
 	{
 
@@ -264,7 +264,7 @@ class MainTest
 		Setup();	
 		
 		DefaultWeights();
-		GeneratePopulation(100);
+		GeneratePopulation(popSize);
 		
 		SetWeights();
 		//SetWeights();
@@ -282,9 +282,11 @@ class MainTest
 	
 	public ReturnData Run (int num1, int num2, int num3)
 	{
-		Console.WriteLine("recieved data"+num1);
-		Console.WriteLine("recieved data"+num2);
-		Console.WriteLine("recieved data"+num3);
+		Console.WriteLine("recieved data input 1"+num1);
+		Console.WriteLine("recieved data input 2"+num2);
+		Console.WriteLine("recieved data input 3"+num3);
+		Console.WriteLine("neuron count"+neurons.Count);
+		Console.WriteLine("neuron count"+population.Count);
 		
 		for (int i =0; i<6; i+=2) {
 			if (i == 0) {
@@ -330,14 +332,18 @@ class MainTest
 		current++;
 		DefaultWeights ();
 		
-		genCounter++;
-		if (current >= connections.Count) {
+		if (current >= popSize) {
 			List<Chromosome> newPop = new List<Chromosome> ();
 			population.Sort ();
-			int removeAmount = (int)(connections.Count * crossoverRate);
-			for (int i = 0; i < connections.Count; i++) {
-				if (i >= removeAmount)
-					population.RemoveAt (i);
+				float f = population[0].fitness;
+				
+				sw.WriteLine(f);
+				sw.Close();
+				
+            int removeAmount = (int)(popSize * crossoverRate);
+            for (int i = 0; i < popSize; i++) {
+                if (i >= removeAmount)
+                    population.RemoveAt (removeAmount);
 			}
 			for (int i =0; i<(current - (current*crossoverRate)); i++) {
 				Chromosome p1 = TSelection ();
@@ -350,13 +356,14 @@ class MainTest
 				newPop.Add (mChild);
 			}
 			for (int i=0; i< newPop.Count; i++) {
-				population [removeAmount + i] = newPop [i];	
+				population.Add(newPop [i]); 	
 			}
+            current =(int)( current * crossoverRate);
+                genCounter++;
 			
 		}	
 		
-		
-		current =(int)( current * crossoverRate);
+	
 		SetWeights ();
 		}
 		else{

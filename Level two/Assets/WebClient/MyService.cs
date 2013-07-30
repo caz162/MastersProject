@@ -30,8 +30,6 @@ public partial class MyService : System.Web.Services.Protocols.SoapHttpClientPro
     
     private System.Threading.SendOrPostCallback RunNNOperationCompleted;
     
-    private System.Threading.SendOrPostCallback IncreaseFitnessOperationCompleted;
-    
     private System.Threading.SendOrPostCallback RandOperationCompleted;
     
     public MyService() {
@@ -47,8 +45,6 @@ public partial class MyService : System.Web.Services.Protocols.SoapHttpClientPro
     public event NextItemCompletedEventHandler NextItemCompleted;
     
     public event RunNNCompletedEventHandler RunNNCompleted;
-    
-    public event IncreaseFitnessCompletedEventHandler IncreaseFitnessCompleted;
     
     public event RandCompletedEventHandler RandCompleted;
     
@@ -186,19 +182,21 @@ public partial class MyService : System.Web.Services.Protocols.SoapHttpClientPro
     
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/MyService/RunNN", RequestNamespace="http://tempuri.org/MyService", ResponseNamespace="http://tempuri.org/MyService", ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped, Use=System.Web.Services.Description.SoapBindingUse.Literal)]
     [return: System.Xml.Serialization.XmlArrayItem(IsNullable=false)]
-    public float[] RunNN(int num1, int num2, int num3) {
+    public float[] RunNN(int num1, int num2, int num3, bool hit) {
         object[] results = this.Invoke("RunNN", new object[] {
                     num1,
                     num2,
-                    num3});
+                    num3,
+                    hit});
         return ((float[])(results[0]));
     }
     
-    public System.IAsyncResult BeginRunNN(int num1, int num2, int num3, System.AsyncCallback callback, object asyncState) {
+    public System.IAsyncResult BeginRunNN(int num1, int num2, int num3, bool hit, System.AsyncCallback callback, object asyncState) {
         return this.BeginInvoke("RunNN", new object[] {
                     num1,
                     num2,
-                    num3}, callback, asyncState);
+                    num3,
+                    hit}, callback, asyncState);
     }
     
     public float[] EndRunNN(System.IAsyncResult asyncResult) {
@@ -206,55 +204,25 @@ public partial class MyService : System.Web.Services.Protocols.SoapHttpClientPro
         return ((float[])(results[0]));
     }
     
-    public void RunNNAsync(int num1, int num2, int num3) {
-        this.RunNNAsync(num1, num2, num3, null);
+    public void RunNNAsync(int num1, int num2, int num3, bool hit) {
+        this.RunNNAsync(num1, num2, num3, hit, null);
     }
     
-    public void RunNNAsync(int num1, int num2, int num3, object userState) {
+    public void RunNNAsync(int num1, int num2, int num3, bool hit, object userState) {
         if ((this.RunNNOperationCompleted == null)) {
             this.RunNNOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRunNNCompleted);
         }
         this.InvokeAsync("RunNN", new object[] {
                     num1,
                     num2,
-                    num3}, this.RunNNOperationCompleted, userState);
+                    num3,
+                    hit}, this.RunNNOperationCompleted, userState);
     }
     
     private void OnRunNNCompleted(object arg) {
         if ((this.RunNNCompleted != null)) {
             System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
             this.RunNNCompleted(this, new RunNNCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-        }
-    }
-    
-    [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/MyService/IncreaseFitness", RequestNamespace="http://tempuri.org/MyService", ResponseNamespace="http://tempuri.org/MyService", ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped, Use=System.Web.Services.Description.SoapBindingUse.Literal)]
-    public void IncreaseFitness() {
-        this.Invoke("IncreaseFitness", new object[0]);
-    }
-    
-    public System.IAsyncResult BeginIncreaseFitness(System.AsyncCallback callback, object asyncState) {
-        return this.BeginInvoke("IncreaseFitness", new object[0], callback, asyncState);
-    }
-    
-    public void EndIncreaseFitness(System.IAsyncResult asyncResult) {
-        this.EndInvoke(asyncResult);
-    }
-    
-    public void IncreaseFitnessAsync() {
-        this.IncreaseFitnessAsync(null);
-    }
-    
-    public void IncreaseFitnessAsync(object userState) {
-        if ((this.IncreaseFitnessOperationCompleted == null)) {
-            this.IncreaseFitnessOperationCompleted = new System.Threading.SendOrPostCallback(this.OnIncreaseFitnessCompleted);
-        }
-        this.InvokeAsync("IncreaseFitness", new object[0], this.IncreaseFitnessOperationCompleted, userState);
-    }
-    
-    private void OnIncreaseFitnessCompleted(object arg) {
-        if ((this.IncreaseFitnessCompleted != null)) {
-            System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-            this.IncreaseFitnessCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
         }
     }
     
@@ -353,8 +321,6 @@ public partial class RunNNCompletedEventArgs : System.ComponentModel.AsyncComple
 }
 
 public delegate void RunNNCompletedEventHandler(object sender, RunNNCompletedEventArgs args);
-
-public delegate void IncreaseFitnessCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs args);
 
 public partial class RandCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
     

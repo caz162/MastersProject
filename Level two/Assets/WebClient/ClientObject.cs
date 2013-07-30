@@ -20,8 +20,8 @@ public class ClientObject : MonoBehaviour {
 	
 	}
 	
-	void Hit(int i){
-		
+	void Hit(){
+		hit = true;
 	}
  	void OnTriggerEnter(Collider other) {
 		if(other.gameObject.tag == "2"){
@@ -34,7 +34,7 @@ public class ClientObject : MonoBehaviour {
 		change = false;
 		Debug.Log("waiting");
 		GameObject.Find("Main Camera").SendMessage("Generate");
-		yield return new WaitForSeconds(10);
+		yield return new WaitForSeconds(30);
 		transform.position = new Vector3(-6.360526f,1,3.495263f);
 		Debug.Log("should have reset");
 		service.NextItem();
@@ -83,9 +83,9 @@ public class ClientObject : MonoBehaviour {
 			Debug.DrawRay(transform.position, transform.TransformDirection( new Vector3(1,0,1)) * hit3.distance,Color.green);
 		}
 			//Debug.Log("running");
-		float[] b = service.RunNN(int.Parse( hit1.collider.tag),int.Parse( hit2.collider.tag),int.Parse( hit3.collider.tag) );
+		float[] b = service.RunNN(int.Parse( hit1.collider.tag),int.Parse( hit2.collider.tag),int.Parse( hit3.collider.tag),hit );
 		if(hit){
-				service.IncreaseFitness();
+				//service.IncreaseFitness();
 				hit=false;
 			}
 		transform.Rotate(new Vector3(0, direction.y + b[0],0));

@@ -14,6 +14,7 @@ public class ObjectScript : MonoBehaviour {
 	}
 	  void OnCollisionEnter(Collision collision) {
 		if(collision.gameObject.tag == "3"){
+			collision.gameObject.SendMessage("Hit");
 		Debug.Log("destroying");
 		Destroy(this.gameObject);
 		}

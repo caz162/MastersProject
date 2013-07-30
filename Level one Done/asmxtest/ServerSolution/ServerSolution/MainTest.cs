@@ -22,7 +22,7 @@ class MainTest
 	bool canRun = false;
 	int generations = 100;
 	int genCounter = 0;
-	
+	StreamWriter sw = new StreamWriter("results.txt",true);
 	void Setup ()
 	{
 
@@ -334,6 +334,11 @@ class MainTest
 		if (current >= connections.Count) {
 			List<Chromosome> newPop = new List<Chromosome> ();
 			population.Sort ();
+				float f = population[0].fitness;
+				
+				sw.WriteLine(f);
+				sw.Close();
+				
 			int removeAmount = (int)(connections.Count * crossoverRate);
 			for (int i = 0; i < connections.Count; i++) {
 				if (i >= removeAmount)
