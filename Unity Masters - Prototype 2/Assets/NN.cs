@@ -16,6 +16,6 @@ public class NN : MonoBehaviour {
 	}
 	
 	void OnGUI(){
-		GUI.Label(new Rect(10, 100, 200, 20), "Distance  - " + (area.transform.position -transform.position).magnitude);	
+		//GUI.Label(new Rect(10, 100, 200, 20), "Distance  - " + (area.transform.position -transform.position).magnitude);	
 	}
 }

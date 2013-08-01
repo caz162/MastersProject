@@ -21,8 +21,6 @@ public class Raycasting : MonoBehaviour {
 	}
 	
 	void OnGUI(){
-	GUI.Label(new Rect(10, 10, 100, 20), "Object - "+objectAimed);
-	GUI.Label(new Rect(10, 60, 200, 20), "Ray Distance - " + distance);
 	}
 }
 
