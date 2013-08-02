@@ -49,11 +49,11 @@
      <Compile Include="Assets\Prefabs\Wander.cs" />
      <Compile Include="Assets\WebClient\ClientObject.cs" />
      <Compile Include="Assets\WebClient\MyService.cs" />
- <Reference Include="System.Web">
- <HintPath>Assets\Plugins\System.Web.dll</HintPath>
- </Reference>
  <Reference Include="System.Web.Services">
  <HintPath>Assets\Plugins\System.Web.Services.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Web">
+ <HintPath>Assets\Plugins\System.Web.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

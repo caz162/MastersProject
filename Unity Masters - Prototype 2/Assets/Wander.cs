@@ -28,7 +28,7 @@ public class Wander : MonoBehaviour {
 	}
 	
 	void OnGUI(){
-		if(GUI.Button(new Rect(0,40,100,100),"Test Service")){
+		if(GUI.Button(new Rect(0,200,100,100),"Test Service")){
 				Debug.Log("Times Clicked " +service.Add(i,1));
 			i++;
 			}
