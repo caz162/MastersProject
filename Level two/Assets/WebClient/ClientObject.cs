@@ -36,6 +36,7 @@ public class ClientObject : MonoBehaviour {
 		GameObject.Find("Main Camera").SendMessage("Generate");
 		yield return new WaitForSeconds(30);
 		transform.position = new Vector3(-6.360526f,1,3.495263f);
+		transform.rotation = new Quaternion(0,0,0,0);
 		Debug.Log("should have reset");
 		service.NextItem();
 		change = true;

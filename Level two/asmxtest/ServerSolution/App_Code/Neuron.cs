@@ -46,16 +46,12 @@ class Neuron
             }
         }
 
+
         void Activation()
         {
-            if (inputNum >= 1)
-            {
-                SendData(1);
-            }
-            else
-            {
-                SendData(0);
-            }
+                SendData((float)Math.Tanh((double)inputNum));
+
+
         }
 
         public void RecieveData(float num)

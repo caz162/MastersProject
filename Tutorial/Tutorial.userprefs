@@ -1,8 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\WebClient\ClientObject.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\Level two\asmxtest\ServerSolution\App_Code\Neuron.cs">
     <Files>
-      <File FileName="Assets\WebClient\ClientObject.cs" Line="31" Column="1" />
+      <File FileName="..\Level two\asmxtest\ServerSolution\App_Code\Neuron.cs" Line="51" Column="35" />
+      <File FileName="Assets\WebClient\ClientObject.cs" Line="19" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -352,11 +352,12 @@ class MainTest
 				for (int i=0; i<population.Count; i++) {
 					Console.WriteLine ("" + population [i].fitness);	
 				}
-				
+				/*
 				using (StreamWriter writer = new StreamWriter("results.txt",true)) {
 					writer.WriteLine (population [0].fitness);
 					writer.Close ();
 				}
+				*/
 				int removeAmount = (int)(popSize * crossoverRate);
 				for (int i = 0; i < popSize; i++) {
 					if (i >= removeAmount)
@@ -384,6 +385,7 @@ class MainTest
 			SetWeights ();
 		} else {
 			population.Sort ();
+			population.Reverse();
 			current = 0;
 			Save ();
 			SetWeights ();
