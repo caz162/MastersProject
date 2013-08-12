@@ -1,11 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\WebClient\ClientObject.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\GenerateObjects.js">
     <Files>
+      <File FileName="asmxtest\ServerSolution\App_Code\MainTest.cs" Line="348" Column="51" />
+      <File FileName="Assets\WebClient\ClientObject.cs" Line="38" Column="60" />
       <File FileName="asmxtest\ServerSolution\App_Code\Neuron.cs" Line="51" Column="10" />
       <File FileName="asmxtest\ServerSolution\App_Code\MyService.asmx.cs" Line="14" Column="91" />
-      <File FileName="asmxtest\ServerSolution\App_Code\MainTest.cs" Line="360" Column="7" />
-      <File FileName="Assets\WebClient\ClientObject.cs" Line="39" Column="48" />
+      <File FileName="Assets\GenerateObjects.js" Line="17" Column="38" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

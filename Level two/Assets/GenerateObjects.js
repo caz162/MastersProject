@@ -13,7 +13,7 @@ function Update () {
 
 function Generate(){
 
-	var objects = GameObject.FindGameObjectsWithTag("2");
+	var objects = GameObject.FindGameObjectsWithTag("20");
 	for(var go : GameObject in objects){
 		Destroy(go);
 	}

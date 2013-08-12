@@ -11,7 +11,7 @@ public class ClientObject : MonoBehaviour {
 	bool change = true;
 	bool firstTime = true;
 	bool hit = false;
-	
+	bool canRun = true;
 		
 	// Use this for initialization
 	void Awake () {
@@ -38,9 +38,13 @@ public class ClientObject : MonoBehaviour {
 		transform.position = new Vector3(-6.360526f,1,3.495263f);
 		transform.rotation = new Quaternion(0,0,0,0);
 		Debug.Log("should have reset");
+		canRun = false;
 		service.NextItem();
+		yield return new WaitForSeconds(5);
 		change = true;
+		canRun = true;
 	}
+	
 	
 	IEnumerator Delay(){
 		yield return new WaitForSeconds(5);	
@@ -60,7 +64,7 @@ public class ClientObject : MonoBehaviour {
 			Debug.Log("change called");
 			StartCoroutine(ChangeChromosome());	
 		}
-		
+		if(canRun){
 		rigidbody.velocity = Vector3.zero;
 			
 		RaycastHit hit1;
@@ -93,7 +97,7 @@ public class ClientObject : MonoBehaviour {
 		transform.Translate(Vector3.forward * (Time.deltaTime* (b[1]*5)));
 		//Debug.Log(n);
 		//Debug.Log(service.RunNN());
-		
+			}
 	}
 	}
 }
