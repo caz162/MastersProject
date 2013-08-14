@@ -1,6 +1,5 @@
 using System;
 using System.Web.Services;
-using ServerSolution;
 
 using System.Collections.Generic;
 
@@ -44,11 +43,9 @@ public class MyService
 	
 	//Running the nerual network
 	[WebMethod]
-	public ReturnData RunNN(int num1, int num2, int num3){
-		ReturnData value1 = test.Run(num1, num2,num3);
-		if(num2 == 3){
-			test.RecieveFitness(1);
-		}
+	public float[] RunNN(int num1, int num2, int num3, bool hit){
+		float[] value1 = test.Run(num1, num2,num3,hit);
+
 		//Console.WriteLine(t.Run());
 		return value1;
 	}

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters;
-using ServerSolution;
 
 class MainTest
 {
@@ -17,12 +16,12 @@ class MainTest
 	int current = 0;
 	bool newPop = false;
 	float crossoverRate = 0.25f;
-	int popSize =10;
+	int popSize = 20;
 	float mutationRate = 0.08f;
 	bool canRun = false;
-	int generations = 100;
+	int generations = 50;
 	int genCounter = 0;
-	StreamWriter sw = new StreamWriter("results.txt",true);
+	
 	void Setup ()
 	{
 
@@ -260,34 +259,38 @@ class MainTest
 		}
 	}
 	
-	public void defaultSetup(){
-		Setup();	
+	public void defaultSetup ()
+	{
+		Setup ();	
 		
-		DefaultWeights();
-		GeneratePopulation(popSize);
+		DefaultWeights ();
+		GeneratePopulation (popSize);
 		
-		SetWeights();
+		SetWeights ();
 		//SetWeights();
 	}
 	
-	public void Save(){
-		StreamWriter sw = new StreamWriter("file.txt");
-		for(int i=0;i<population[current].genes.Count;i++){
-			sw.WriteLine(population[current].genes[i]);
+	public void Save ()
+	{
+		StreamWriter sw = new StreamWriter ("file.txt");
+		for (int i=0; i<population[current].genes.Count; i++) {
+			sw.WriteLine (population [current].genes [i]);
 		}
 		
-	sw.Close();
+		sw.Close ();
 
 	}
 	
-	public ReturnData Run (int num1, int num2, int num3)
+	public float[] Run (int num1, int num2, int num3, bool hit)
 	{
-		Console.WriteLine("recieved data input 1"+num1);
-		Console.WriteLine("recieved data input 2"+num2);
-		Console.WriteLine("recieved data input 3"+num3);
-		Console.WriteLine("neuron count"+neurons.Count);
-		Console.WriteLine("neuron count"+population.Count);
-		
+		//Console.WriteLine("recieved data"+num1);
+		//Console.WriteLine("recieved data"+num2);
+		//Console.WriteLine("recieved data"+num3);
+		/*	if(num1 == 3){
+			Console.WriteLine("increasing fitness");
+			RecieveFitness(1);	
+		}
+			*/
 		for (int i =0; i<6; i+=2) {
 			if (i == 0) {
 				neurons [0 + i].RecieveData (num1);
@@ -303,13 +306,18 @@ class MainTest
 		}
 		
 		//  Console.WriteLine("Finished is " + neurons[neurons.Count-1].GetOutput());
-		
-			float [] returns = new float[2];
-		
+		if(hit){
+			//Console.WriteLine("fitness");
+			//Console.WriteLine ("adding");
+				RecieveFitness(1);
+		}
+		float [] returns = new float[2];
+		//Console.WriteLine(neurons [neurons.Count - 1].GetOutput ());
 		returns [0] = neurons [neurons.Count - 1].GetOutput ();
+		//Console.WriteLine(neurons [neurons.Count - 2].GetOutput ());
 		returns [1] = neurons [neurons.Count - 2].GetOutput ();
-		ReturnData r1 = new ReturnData(0,returns);
-		return r1; 
+		
+		return returns; 
 	}
 	
 	public void GeneratePopulation (int size)
@@ -317,7 +325,7 @@ class MainTest
 		for (int i = 0; i<size; i++) {
 			Chromosome c = new Chromosome (id);
 			for (int j=0; j<connections.Count; j++) {
-				c.AddGene (r.Next(-10,10));
+				c.AddGene (r.Next (-10, 10));
 				
 			}
 			population.Add (c);
@@ -327,50 +335,74 @@ class MainTest
 	
 	public void ChangeChromosome ()
 	{
-		Console.WriteLine("Fitness " + population[current].fitness);
-		if(genCounter<generations){
-		current++;
-		DefaultWeights ();
+		//Console.WriteLine ("Fitness " + population [current].fitness);
+		//Console.WriteLine ("population member" + current);
+		//Console.WriteLine ("generation" + genCounter);
 		
-		if (current >= popSize) {
-			List<Chromosome> newPop = new List<Chromosome> ();
-			population.Sort ();
-				float f = population[0].fitness;
-				
-				sw.WriteLine(f);
-				sw.Close();
-				
-            int removeAmount = (int)(popSize * crossoverRate);
-            for (int i = 0; i < popSize; i++) {
-                if (i >= removeAmount)
-                    population.RemoveAt (removeAmount);
-			}
-			for (int i =0; i<(current - (current*crossoverRate)); i++) {
-				Chromosome p1 = TSelection ();
-				Chromosome p2 = TSelection ();
-				while (p1.id == p2.id) {
-					p2 = TSelection ();
+		if (genCounter < generations) {
+			current++;
+			DefaultWeights ();
+		
+		
+			if (current >= popSize) {
+				Console.WriteLine ("generation" + genCounter);
+				List<Chromosome> newPop = new List<Chromosome> ();
+				population.Sort ();
+				population.Reverse();
+				//Console.WriteLine ("Fitnesses");
+				float average = 0;
+				for (int i=0; i<population.Count; i++) {
+					average += population [i].fitness;	
 				}
-				Chromosome child = Crossover (p1, p2);
-				Chromosome mChild = Mutation (child);
-				newPop.Add (mChild);
-			}
-			for (int i=0; i< newPop.Count; i++) {
-				population.Add(newPop [i]); 	
-			}
-            current =(int)( current * crossoverRate);
-                genCounter++;
-			
-		}	
+				average = average / population.Count;
+				Console.WriteLine ("" + population [0].fitness);	
+				Console.WriteLine ("" + average);	
+				/*
+				using (StreamWriter writer = new StreamWriter("results.txt",true)) {
+					writer.WriteLine (population [0].fitness);
+					writer.Close ();
+				}
+				*/
+				int removeAmount = (int)(popSize * crossoverRate);
+				for (int i = 0; i < popSize; i++) {
+					if (i >= removeAmount)
+						population.RemoveAt (removeAmount);
+					//Console.WriteLine("removing");
+				}
+				for (int i =0; i<(current - (current*crossoverRate)); i++) {
+					Chromosome p1 = TSelection ();
+					Chromosome p2 = TSelection ();
+					//Console.WriteLine("selection");
+					/*
+					while (p1.id == p2.id) {
+						Console.WriteLine("while loop");
+						p2 = TSelection ();
+					}
+					*/
+					//Console.WriteLine("selection done");
+					Chromosome child = Crossover (p1, p2);
+					//Console.WriteLine("crossover done");
+					Chromosome mChild = Mutation (child);
+					//Console.WriteLine("Mutation done");
+					newPop.Add (mChild);
+				}
+				for (int i=0; i< newPop.Count; i++) {
+					population.Add (newPop [i]);	
+					//Console.WriteLine("adding kids");
+				}
+				current = (int)(current * crossoverRate);
+				genCounter++;
+			}	
 		
-	
-		SetWeights ();
-		}
-		else{
-			population.Sort();
-			current =0;
-			Save();
-			SetWeights();
+		
+		
+			SetWeights ();
+		} else {
+			population.Sort ();
+			population.Reverse();
+			current = 0;
+			//Save ();
+			SetWeights ();
 		}
 	}
 	
@@ -431,7 +463,7 @@ class MainTest
 	public void RecieveFitness (int fit)
 	{
 		population [current].IncreaseFitness (fit);
-		Console.WriteLine (population [current].fitness);
+		//Console.WriteLine ("Fitness has increased by " + population [current].fitness);
 	}
 	
 	void DefaultWeights ()

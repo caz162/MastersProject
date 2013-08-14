@@ -10,7 +10,8 @@ public class ClientObject : MonoBehaviour {
 	Random r = new Random();
 	bool change = true;
 	bool firstTime = true;
-		
+	bool canRun = true;
+		bool hit;
 	// Use this for initialization
 	void Awake () {
 		service = new MyService();
@@ -25,11 +26,15 @@ public class ClientObject : MonoBehaviour {
 	IEnumerator ChangeChromosome(){
 		change = false;
 		Debug.Log("waiting");
-		yield return new WaitForSeconds(10);
+		yield return new WaitForSeconds(30);
 		transform.position = new Vector3(-6.360526f,1,3.495263f);
+		transform.rotation = new Quaternion(0,0,0,0);
 		Debug.Log("should have reset");
+		canRun = false;
 		service.NextItem();
+		yield return new WaitForSeconds(5);
 		change = true;
+		canRun = true;
 	}
 	
 	IEnumerator Delay(){
@@ -50,7 +55,7 @@ public class ClientObject : MonoBehaviour {
 			Debug.Log("change called");
 			StartCoroutine(ChangeChromosome());	
 		}
-		
+		if(canRun){
 		rigidbody.velocity = Vector3.zero;
 			
 		RaycastHit hit1;
@@ -74,13 +79,17 @@ public class ClientObject : MonoBehaviour {
 			Debug.DrawRay(transform.position, transform.TransformDirection( new Vector3(1,0,1)) * hit3.distance,Color.green);
 		}
 			//Debug.Log("running");
-		float[] b = service.RunNN(int.Parse( hit1.collider.tag),int.Parse( hit2.collider.tag),int.Parse( hit3.collider.tag) );
+		if(hit1.collider.tag == "3"){
+				hit = true;	
+				}
+		float[] b = service.RunNN(int.Parse( hit1.collider.tag),int.Parse( hit2.collider.tag),int.Parse( hit3.collider.tag),hit );
 		
+		hit = false;
 		transform.Rotate(new Vector3(0, direction.y + b[0],0));
 		transform.Translate(Vector3.forward * (Time.deltaTime* (b[1]*5)));
 		//Debug.Log(n);
 		//Debug.Log(service.RunNN());
-		
+			}
 	}
 	}
 }
