@@ -19,7 +19,7 @@ class MainTest
 	int popSize = 20;
 	float mutationRate = 0.08f;
 	bool canRun = false;
-	int generations = 50;
+	int generations = 15;
 	int genCounter = 0;
 	
 	void Setup ()
